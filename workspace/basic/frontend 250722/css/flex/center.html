@@ -14,8 +14,8 @@
       background:url('images/bg.jpg') no-repeat left top fixed;
       background-size:cover;   
       display: flex;
-      /* justify-content: center; */ /* 가로 중앙 정렬 */
-      /* align-items: center; */ /* 세로 중앙 정렬 */
+      justify-content: center; /* 가로 중앙 정렬 */
+      align-items: center; /* 세로 중앙 정렬 */
       height: 100vh; /* 화면 전체 높이 */
     }
     button {
@@ -28,8 +28,16 @@
       height: 50px;
     }
   </style>  
+  <script>
+  function increase(btn) {
+    // 현재 버튼의 숫자를 가져와 숫자로 변환
+    let current = parseInt(btn.innerText);
+    // 1 증가시킨 후 다시 버튼 텍스트에 넣기
+    btn.innerText = current + 1;
+  }
+</script>
 </head>
 <body>
-  <button>클릭!</button>             
+  <button onclick="increase(this)">0</button>
 </body>
 </html>

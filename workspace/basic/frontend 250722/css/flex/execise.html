@@ -9,10 +9,11 @@
       margin: 0;
     }
     .container {
-      height: 150px; /* 화면 전체 높이 */
+      width: 100%; /* 화면 전체 높이 */
+      height: 300px; /* 화면 전체 높이 */
       display: flex;
-      justify-content: center; /* 수평 중앙 정렬 */
-      align-items: center;     /* 수직 중앙 정렬 */
+      justify-content: space-between; /* 수평 중앙 정렬 */
+      align-items: flex-end;     /* 수직 중앙 정렬 */
       gap: 20px;
       background-color: #f0f0f0;
       border: black 1px dotted;
@@ -30,6 +31,11 @@
 </head>
 <body>
   <div class="container">
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+  </div>
+  <div class="container" style="flex-direction: column;">
     <div class="box">Box 1</div>
     <div class="box">Box 2</div>
     <div class="box">Box 3</div>

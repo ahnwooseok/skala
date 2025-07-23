@@ -32,7 +32,11 @@
     /* 주축의 방향을 지정하는 #opt1 ~ #opt4 스타일 만들기 */
     #opt1 {
       display: flex;
-      flex-direction: row; /* 기본값: 가로 방향 */
+      flex-direction: row; /* 기본값: 가로 방향
+      /* 전역 값 */
+      /* flex-direction: inherit; */
+      /* flex-direction: initial; */
+      /* flex-direction: unset; */
     }
     #opt2 {
       display: flex;
@@ -45,6 +49,14 @@
     #opt4 {
       display: flex;
       flex-direction: column-reverse; /* 세로 방향 (역순) */
+    }
+    #opt5 {
+      width: 50%;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      flex-direction: row; /* 세로 방향 (역순) */
+      justify-content: space-between
     }
   </style>
 </head>
@@ -69,5 +81,16 @@
     <div class="box"><p>2</p></div>
     <div class="box"><p>3</p></div>
   </div>            
+    <div class="container" id="opt5">
+    <div class="box"><p>1</p></div>
+    <div class="box"><p>2</p></div>
+    <div class="box"><p>3</p></div>
+    <div class="box"><p>4</p></div>
+    <div class="box"><p>5</p></div>
+    <div class="box"><p>6</p></div>
+    <div class="box"><p>7</p></div>
+    <div class="box"><p>8</p></div>
+    <div class="box"><p>9</p></div>
+  </div>        
 </body>
 </html>

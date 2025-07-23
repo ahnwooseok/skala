@@ -1,61 +1,129 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>Transition + Transform Demo</title>
+  <meta charset="UTF-8" />
+  <title>룰렛판 + 공 회전 + 결과 출력</title>
   <style>
     body {
-      font-family: sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 50px;
-    }
-
-    /* 상단 박스 */
-    .box {
-      width: 200px;
-      height: 100px;
-      background-color: green;
+      font-family: sans-serif;
+      background: #0b2a36;
       color: white;
-      display: flex;
-      align-items: center;
+      margin: 0;
+      height: 100vh;
       justify-content: center;
-      border-radius: 20px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
-    .box:hover {
-      background-color: yellow;
-      color: black;
+    .roulette-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border: 8px solid #333;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #0c3d5d, #001f2e);
+      box-shadow: 0 0 30px #00497a;
     }
 
-    /* 하단 버튼 */
-    button {
+    /* 숫자 원판 */
+    .number {
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      font-weight: bold;
+      user-select: none;
+      color: #eee;
+      /* rotate 텍스트 각도 조절용 */
+      transform-origin: 50% 150px;
+    }
+
+    /* 흰 공 */
+    .ball {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 2px #fff;
+      /* 원판 반지름 + 공 반지름만큼 이동 */
+      transform-origin: -180px 50%;
+      animation: ballRotate 10s linear infinite;
+    }
+
+    @keyframes ballRotate {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #result {
       margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    /* 회전 클래스 */
-    .box.rotated {
-      margin-bottom: 20px;
-      transform: rotate(45deg);
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #00ff9f;
+      text-shadow: 0 0 10px #00ff9f;
+      user-select: none;
     }
   </style>
 </head>
 <body>
 
-  <div id="targetBox" class="box">hover me</div>
+  <div class="roulette-container" id="roulette">
+    <div class="ball"></div>
+  </div>
 
-  <button onclick="rotateBox()">상단 박스 회전</button>
+  <div id="result">당첨 번호: -</div>
 
   <script>
-    function rotateBox() {
-      const box = document.getElementById('targetBox');
-      box.classList.toggle('rotated'); // 토글 방식으로 회전 및 원상복구
+    const roulette = document.getElementById('roulette');
+
+    // 0~36 숫자 37개를 원판 둘레에 배치
+    const totalNumbers = 37;
+    const radius = 180; // 숫자 위치 거리 (중심으로부터)
+    for(let i=0; i < totalNumbers; i++) {
+      const numDiv = document.createElement('div');
+      numDiv.classList.add('number');
+      numDiv.textContent = i;
+
+      // 각 숫자의 각도 (360도 / 37)
+      const angle = (360 / totalNumbers) * i;
+
+      // 위치 계산: 중심 + 반지름 * 삼각함수 (회전 방향 맞추기 위해 -90도 조정)
+      const rad = (angle - 90) * Math.PI / 180;
+      const x = radius * Math.cos(rad);
+      const y = radius * Math.sin(rad);
+
+      numDiv.style.left = `calc(50% + ${x}px - 20px)`;  // 20px는 너비 반절 보정
+      numDiv.style.top  = `calc(50% + ${y}px - 10px)`;  // 10px는 높이 반절 보정
+
+      // 숫자 회전 각도 맞춤 (글자가 항상 수평 유지)
+      numDiv.style.transform = `rotate(${angle}deg) rotate(-${angle}deg)`;
+
+      roulette.appendChild(numDiv);
     }
+
+    // 결과 출력 (10초마다 랜덤)
+    const resultDiv = document.getElementById('result');
+
+    function getRandomNumber() {
+      return Math.floor(Math.random() * totalNumbers);
+    }
+
+    function showResult() {
+      const num = getRandomNumber();
+      resultDiv.textContent = `당첨 번호: ${num}`;
+      console.log('당첨 번호:', num);
+    }
+
+    // 초기 결과 표시
+    showResult();
+
+    // 10초마다 결과 변경
+    setInterval(showResult, 10000);
   </script>
 
 </body>

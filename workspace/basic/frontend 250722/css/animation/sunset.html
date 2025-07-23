@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/sunset.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sun and Moon Animation</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to top, #001848, #ffb347);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sun, .moon {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      box-shadow: 0 0 30px 10px rgba(255, 165, 0, 0.6);
+    }
+
+    .sun {
+      background: radial-gradient(circle at center, #ffd700, #ff8c00);
+      bottom: 0;
+      right: 0;
+      animation: sunPath 5s linear infinite;
+    }
+
+    .moon {
+      background: radial-gradient(circle at center, #eee, #bbb);
+      box-shadow: 0 0 20px 6px rgba(220, 220, 220, 0.8);
+      bottom: 0;
+      right: 0;
+      animation: moonPath 5s linear infinite;
+      animation-delay: 4s; /* 해 움직임과 반대 타이밍 */
+    }
+
+    /* 해: 우측하단 → 좌측하단 포물선 */
+    @keyframes sunPath {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-25vw, -30vh); }
+      50%  { transform: translate(-50vw, -50vh); }
+      75%  { transform: translate(-75vw, -30vh); }
+      100% { transform: translate(-100vw, 0); }
+    }
+
+    /* 달: 좌측하단 → 우측하단 동일 포물선 반대방향 */
+    @keyframes moonPath {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-25vw, -30vh); }
+      50%  { transform: translate(-50vw, -50vh); }
+      75%  { transform: translate(-75vw, -30vh); }
+      100% { transform: translate(-100vw, 0); }
+    }
+  </style>
 </head>
 <body>
-    <div class="sun"></div>
+  <div class="sun"></div>
+  <div class="moon"></div>
 </body>
 </html>

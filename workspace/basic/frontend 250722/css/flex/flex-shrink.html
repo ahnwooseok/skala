@@ -13,7 +13,10 @@
       gap: 10px;
     }                               
     .box {
-      flex-basis: 300px; 
+      flex-basis: 1000px; 
+    }
+    .box2 {
+      flex-basis: 800px; 
     }
     .box:nth-child(odd) {
       background-color: #ffc400;
@@ -31,13 +34,13 @@
       flex-shrink: 1; /* 1번 상자는 기본값인 1로 설정 */
     }
     #box2 {
-      flex-shrink: 1; /* 2번 상자는 축소되지 않음 */
+      flex-shrink: 0; /* 2번 상자는 축소되지 않음 */
     }
     #box3 {
       flex-shrink: 1; /* 3번 상자는 축소되지 않음 */
     }
     #box4 {
-      flex-shrink: 1; /* 4번 상자는 다른 상자보다 두 배로 축소됨 */
+      flex-shrink: 2; /* 4번 상자는 다른 상자보다 두 배로 축소됨 */
     }
       
   </style>
@@ -48,6 +51,12 @@
     <div class="box" id="box2"><p>2</p></div>
     <div class="box" id="box3"><p>3</p></div>
     <div class="box" id="box4"><p>4</p></div>
+  </div>      
+    <div class="container">
+    <div class="box2" id="box1"><p>1</p></div>
+    <div class="box2" id="box2"><p>2</p></div>
+    <div class="box2" id="box3"><p>3</p></div>
+    <div class="box2" id="box4"><p>4</p></div>
   </div>          
 </body>
 </html>
